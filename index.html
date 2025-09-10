@@ -244,7 +244,7 @@
 </footer>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-  // Expanded catalog of plastic toys replaced with kids playing images from Freepik [web:55][web:58][web:73]
+  // Catalog toys with kids playing photos from Freepik
   const toys = [
     {
       name: "Colorful Kids Building Blocks",
@@ -332,7 +332,7 @@
     toyGrid.appendChild(card);
   });
 
-  // Sales Data for past year (12 months) including revenue, cost, and profit
+  // Past year sales data including revenue, cost, profit
   const salesData = [
     {
       month: "jan",
@@ -492,6 +492,7 @@
     }
   ];
 
+  // Toy keys and friendly labels for chart
   const toyKeys = [
     "ColorfulKidsBuildingBlocks",
     "ChildPlayingPlasticToyCar",
@@ -546,21 +547,7 @@
     "Dec"
   ];
 
-  // Render toy catalog cards
-  const toyGrid = document.getElementById("toyGrid");
-  toys.forEach((toy) => {
-    const card = document.createElement("div");
-    card.className = "toy-card";
-    card.innerHTML = `
-      <img src="${toy.image}" alt="${toy.name}" class="toy-img" loading="lazy" />
-      <div class="toy-name">${toy.name}</div>
-      <div class="toy-price">${toy.price}</div>
-      <div class="toy-desc">${toy.desc}</div>
-    `;
-    toyGrid.appendChild(card);
-  });
-
-  // Chart: visualize profits for selected month or year
+  // Render Chart helper for profits
   let salesChart;
   function renderChart(selectedMonth) {
     let chartLabels = [],
@@ -629,7 +616,7 @@
   };
   renderChart("all");
 
-  // CSV download of profits data
+  // Download profits data CSV
   document.getElementById("downloadStatsBtn").onclick = function () {
     let rows = ["Month," + toyLabels.join(",")];
     salesData.forEach((s) => {
