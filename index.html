@@ -2,113 +2,207 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Kid Toys Web Dashboard</title>
+  <title>Kid Toys Catalog Dashboard</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    body { background: #f7faff; font-family: 'Comic Sans MS', cursive, sans-serif; margin: 0; padding: 0;}
-    header { background: linear-gradient(90deg,#42a5f5,#7e57c2); color: #fff; padding: 2rem 2rem 1rem 2rem; box-shadow: 0 4px 10px rgba(50,50,50,0.1);}
-    header h1 { font-size: 2.5rem; margin: 0 0 0.5rem 0; letter-spacing: 1px;}
-    header p { font-size: 1.1rem; margin: 0; }
-    .dashboard { max-width:900px; margin:2rem auto; background: #fff; border-radius: 25px; box-shadow: 0 0 12px #d9e8fb; padding: 2rem;}
-    .catalog-section { margin-bottom:2rem;}
-    .catalog-title { font-size:1.6rem; color:#1e88e5; margin-bottom:1rem;}
-    .catalog-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); gap:1rem;}
-    .toy-card { background:#e3f2fd; border-radius:14px; box-shadow:0 4px 8px rgba(60,60,60,0.07); padding:1rem; text-align:center; display:flex;flex-direction:column;}
-    .toy-img { width:120px; height:120px; border-radius:12px; object-fit:cover; margin:0 auto 0.7rem auto; box-shadow:0 2px 6px #90caf9;}
-    .toy-name { font-size:1.1rem; color:#512da8;margin-bottom:0.4rem;}
-    .toy-price { font-size:1rem; color:#43a047;font-weight:700;margin-bottom:0.3rem;}
-    .toy-desc { font-size:0.95rem; color:#37474f;}
-    #downloadBtn { background:linear-gradient(90deg,#42a5f5,#7e57c2); color:#fff;font-size:1rem; border:none; border-radius:12px;padding:0.7rem 1.8rem;margin:2rem auto 0 auto;display:block;cursor:pointer; box-shadow:0 2px 5px #ce93d8;}
-    #downloadBtn:hover { background:linear-gradient(90deg,#7e57c2,#42a5f5);}
-    .footer {text-align:center;margin:2rem 0;color:#888;font-size:0.95rem;}
+    body {
+      background: linear-gradient(135deg, #e3f0ff 0%, #f8eaea 100%);
+      font-family: 'Comic Sans MS', 'Poppins', Arial, sans-serif;
+      margin: 0; padding: 0;
+    }
+    header {
+      background: linear-gradient(90deg, #ffb347 60%, #42a5f5 100%);
+      color: #fff; padding: 2rem 2rem 1rem 2rem;
+      box-shadow: 0 8px 20px rgba(80,80,120,0.13);
+      border-bottom-right-radius: 42px;
+      border-bottom-left-radius: 42px;
+      text-align: center;
+    }
+    header h1 {
+      font-size: 2.8rem; margin: 0 0 1rem 0; letter-spacing: 2px;
+      font-family: 'Poppins', 'Segoe UI', sans-serif;
+    }
+    header p { font-size: 1.25rem; margin: 0; }
+    .dashboard { max-width:1200px; margin:2rem auto; background: #fff; border-radius: 35px; box-shadow: 0 0 12px #d9e8fb; padding: 2rem; }
+    
+    .catalog-section { margin-bottom:2rem; }
+    .catalog-title { font-size:2rem; color:#ff9800; margin-bottom:1.7rem; font-weight:600; }
+    .catalog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.2rem;
+    }
+    .toy-card {
+      background: #f8fff7;
+      border-radius:20px;
+      box-shadow:0 4px 18px rgba(40,106,224,0.03);
+      padding:1.3rem;
+      text-align:center;
+      display:flex;
+      flex-direction:column;
+      transition: transform 0.1s, box-shadow 0.17s;
+    }
+    .toy-card:hover {
+      transform: translateY(-6px) scale(1.03);
+      box-shadow:0 8px 28px 0 #ffd16650;
+      background: #fff7f3;
+    }
+    .toy-img {
+      width:110px;
+      height:110px;
+      margin:0 auto 0.7rem auto;
+      object-fit:cover;
+      border-radius:15px;
+      box-shadow:0 2px 8px #b2ebf2;
+      border:3px solid #ffb347;
+      background: #fff;
+    }
+    .toy-name { font-size:1.25rem; color:#d35400; margin-bottom:0.4rem; font-weight:500;}
+    .toy-price { font-size:1.07rem; color:#388e3c; margin-bottom:0.25rem; font-weight:600;}
+    .toy-desc { font-size:0.97rem; color:#607d8b; }
+    #downloadBtn {
+      background: linear-gradient(90deg,#ffb347,#42a5f5);
+      color: #fff; font-size: 1.18rem; border: none; border-radius: 18px;
+      padding: 1rem 2.5rem; margin:2.5rem auto 0 auto; display:block;
+      cursor: pointer; font-weight: bold; letter-spacing: 1px;
+      box-shadow:0 2px 9px #ffd16680;
+      transition: background .13s;
+    }
+    #downloadBtn:hover {
+      background: linear-gradient(90deg, #42a5f5, #ffb347);
+    }
+    .footer { text-align:center; margin:2.5rem 0; color:#aaa; font-size:0.99rem; }
+    @media screen and (max-width: 800px) {
+      .dashboard { padding:1rem;}
+      .catalog-title { font-size:1.4rem;}
+      .toy-name { font-size:1.07rem;}
+    }
   </style>
 </head>
 <body>
-  <header>
-    <h1>Kid Toys Dashboard</h1>
-    <p>Discover fun and creative toys for children - interactive catalog with download feature.</p>
-  </header>
-  <main class="dashboard">
-    <section class="catalog-section">
-      <div class="catalog-title">Toy Catalog</div>
-      <div class="catalog-grid" id="toyGrid">
-        <!-- Toy cards go here -->
-      </div>
-    </section>
-    <button id="downloadBtn">Download Catalog</button>
-  </main>
-  <div class="footer">Special & Effective for Kids | Images via Freepik [web:10][web:13]</div>
-  <script>
-    // Sample toy catalog items with Freepik demo images
-    const toys = [
-      {
-        name: "Rainbow Stacker",
-        price: "$15",
-        image: "https://img.freepik.com/free-photo/colorful-wooden-toy_1203-6907.jpg?w=250&t=st=1697098349~exp=1697098949~hmac=e66347dccf1602d76eebdfb0961dd3de",
-        desc: "A classic stacking toy with vibrant colors, perfect for building coordination."
-      },
-      {
-        name: "Animal Puzzles",
-        price: "$22",
-        image: "https://img.freepik.com/free-photo/children-s-educational-toys-wooden-puzzles-with-animal-family_1150-9492.jpg?w=250&t=st=1697098349~exp=1697098949~hmac=e29e3656fc24a2942fd80ac858814760",
-        desc: "Interactive animal puzzles that encourage problem solving and imagination."
-      },
-      {
-        name: "Toy Truck",
-        price: "$18",
-        image: "https://img.freepik.com/free-photo/kids-toy-truck-isolated-wood-background_1150-11184.jpg?w=250&t=st=1697098349~exp=1697098949~hmac=af3eef6dbcf6aeeb1dd93d56f93beafe",
-        desc: "Rugged toy truck for indoor and outdoor play, made of safe materials."
-      },
-      {
-        name: "Building Blocks",
-        price: "$25",
-        image: "https://img.freepik.com/free-photo/kids-plastic-building-blocks-on-table_1232-1565.jpg?w=250&t=st=1697098349~exp=1697098949~hmac=a57c7e076d9aa83b51c4af19c8697b4e",
-        desc: "Colorful interlocking blocks for endless building adventures."
-      }
-    ];
-    // Render toy cards
-    const toyGrid = document.getElementById('toyGrid');
-    toys.forEach(toy => {
-      const card = document.createElement('div');
-      card.className = 'toy-card';
-      card.innerHTML = `
-        <img src="${toy.image}" class="toy-img" alt="${toy.name}">
-        <div class="toy-name">${toy.name}</div>
-        <div class="toy-price">${toy.price}</div>
-        <div class="toy-desc">${toy.desc}</div>
-      `;
-      toyGrid.appendChild(card);
-    });
+<header>
+  <h1>Kid Toys Catalog Dashboard</h1>
+  <p>Explore 50 fun, creative & educational toys for children. Download & share the complete catalog!</p>
+</header>
+<main class="dashboard">
+  <section class="catalog-section">
+    <div class="catalog-title">Toy Catalog (50 Toys with Pictures)</div>
+    <div class="catalog-grid" id="toyGrid"></div>
+  </section>
+  <button id="downloadBtn">Download Catalog</button>
+</main>
+<div class="footer">Images via Freepik · Dashboard designed for kids · Special & Effective[1][2][3]</div>
+<script>
+  // 50 toy items with relevant royalty-free images from Freepik (demo links; swap as desired)
+  const toys = [
+    {name:"Rainbow Stacker",price:"$15",image:"https://img.freepik.com/free-photo/colorful-wooden-toy_1203-6907.jpg",desc:"Classic stacking toy with vibrant colors."},
+    {name:"Animal Puzzles",price:"$22",image:"https://img.freepik.com/free-photo/children-s-educational-toys-wooden-puzzles-with-animal-family_1150-9492.jpg",desc:"Interactive animal puzzles for problem solving."},
+    {name:"Kids Bike",price:"$85",image:"https://img.freepik.com/free-photo/kids-bicycle-outdoors_1150-11250.jpg",desc:"Colorful kid's bicycle for outdoor fun."},
+    {name:"Plush Teddy Bear",price:"$30",image:"https://img.freepik.com/free-photo/brown-plush-toy-white-background_1232-1263.jpg",desc:"Adorable teddy bear for cuddling."},
+    {name:"Toy Truck",price:"$18",image:"https://img.freepik.com/free-photo/kids-toy-truck-isolated-wood-background_1150-11184.jpg",desc:"Rugged toy truck for play."},
+    {name:"Building Blocks",price:"$25",image:"https://img.freepik.com/free-photo/kids-plastic-building-blocks-on-table_1232-1565.jpg",desc:"Interlocking blocks for creativity."},
+    {name:"Board Game",price:"$19",image:"https://img.freepik.com/free-photo/children-playing-board-game_1150-13992.jpg",desc:"Fun board game for group play."},
+    {name:"Musical Drum",price:"$21",image:"https://img.freepik.com/free-photo/colorful-musical-toy_1150-13224.jpg",desc:"Percussion drum for musical fun."},
+    {name:"Magic Drawing Board",price:"$14",image:"https://img.freepik.com/free-photo/kids-drawing-board-table_1232-1402.jpg",desc:"Reusable magnetic drawing tablet for young artists."},
+    {name:"Action Figure Hero",price:"$20",image:"https://img.freepik.com/free-photo/toy-action-figure-white-background_1150-13536.jpg",desc:"Popular superhero figure for imaginative play."},
+    {name:"Mini Basketball",price:"$13",image:"https://img.freepik.com/free-photo/mini-basketball-toy-court_1150-14024.jpg",desc:"Mini hoop basketball set for kids."},
+    {name:"Shape Sorter",price:"$17",image:"https://img.freepik.com/free-photo/shape-sorter-toy-wooden_1203-6625.jpg",desc:"Wooden sorter for learning shapes and colors."},
+    {name:"Plush Elephant",price:"$29",image:"https://img.freepik.com/free-photo/grey-elephant-plush-toy_1232-1982.jpg",desc:"Cute elephant plush for snuggles."},
+    {name:"Toy Train",price:"$23",image:"https://img.freepik.com/free-photo/plastic-train-toy-set_1203-9368.jpg",desc:"Train set for railway adventures."},
+    {name:"Puzzle Cube",price:"$16",image:"https://img.freepik.com/free-photo/kids-toy-puzzle-cube_1150-13442.jpg",desc:"Colorful puzzle cube for brain exercise."},
+    {name:"Bath Ducks",price:"$9",image:"https://img.freepik.com/free-photo/yellow-duck-toy-bath_1150-12506.jpg",desc:"Floating duck toys for bath time fun."},
+    {name:"Baby Xylophone",price:"$15",image:"https://img.freepik.com/free-photo/toy-xylophone-wooden-floor_1203-7263.jpg",desc:"Musical xylophone toy for babies."},
+    {name:"Doll Princess",price:"$33",image:"https://img.freepik.com/free-photo/classic-doll-princess-toy_1232-1091.jpg",desc:"Princess doll for storytime adventures."},
+    {name:"Activity Cube",price:"$28",image:"https://img.freepik.com/free-photo/multicolor-activity-cube-toy_1150-10382.jpg",desc:"Multi-activity center with gears, beads & slides."},
+    {name:"Wooden Car",price:"$16",image:"https://img.freepik.com/free-photo/small-wooden-car-toy_1232-1046.jpg",desc:"Simple wooden car for rolling fun."},
+    {name:"Kids Kitchen Set",price:"$38",image:"https://img.freepik.com/free-photo/children-play-kitchen-toy_1150-12720.jpg",desc:"Role-play kitchen set with utensils and food."},
+    {name:"Soft Football",price:"$12",image:"https://img.freepik.com/free-photo/mini-football-toy-white-background_1150-13640.jpg",desc:"Soft foam football for safe indoor games."},
+    {name:"Stacking Cups",price:"$10",image:"https://img.freepik.com/free-photo/stacking-cups-toy-set_1150-11923.jpg",desc:"Colorful stacking cups for toddlers."},
+    {name:"Toy Robot",price:"$27",image:"https://img.freepik.com/free-photo/toy-robot-white-background_1150-11577.jpg",desc:"Plastic robot for science play."},
+    {name:"Pull-Along Duck",price:"$12",image:"https://img.freepik.com/free-photo/pull-along-duck-toy-wooden_1232-914.jpg",desc:"Classic duck on wheels for pulling along."},
+    {name:"Doctor Kit",price:"$34",image:"https://img.freepik.com/free-photo/toy-doctor-kit-stethoscope_1150-12435.jpg",desc:"Doctor pretend-play medical kit."},
+    {name:"Color Dominoes",price:"$15",image:"https://img.freepik.com/free-photo/colored-dominoes-toy-set_1203-8247.jpg",desc:"Domino set for color recognition and play."},
+    {name:"Animal Mask",price:"$8",image:"https://img.freepik.com/free-photo/animal-mask-craft_kids-toys_1150-13201.jpg",desc:"Animal mask for fancy-dress fun."},
+    {name:"Toy Helicopter",price:"$22",image:"https://img.freepik.com/free-photo/plastic-toy-helicopter-white-background_1150-11536.jpg",desc:"Bright colored helicopter toy for flying adventures."},
+    {name:"Kids Camera",price:"$20",image:"https://img.freepik.com/free-photo/toy-camera-kids-pink_1150-10982.jpg",desc:"Kids play camera for pretend photography."},
+    {name:"Magnetic Letters",price:"$11",image:"https://img.freepik.com/free-photo/magnetic-alphabet-letters-children_1203-7262.jpg",desc:"Alphabet magnets for spelling and learning."},
+    {name:"Rocking Horse",price:"$45",image:"https://img.freepik.com/free-photo/classic-rocking-horse-toy_1232-1776.jpg",desc:"Wooden rocking horse for toddlers."},
+    {name:"Foam Numbers",price:"$6",image:"https://img.freepik.com/free-photo/colorful-foam-numbers-play_1150-14502.jpg",desc:"Foam number set for counting fun."},
+    {name:"Toy Plane",price:"$13",image:"https://img.freepik.com/free-photo/plastic-toy-plane-white-background_1150-12260.jpg",desc:"Plastic airplane for takeoff play."},
+    {name:"Kids Guitar",price:"$29",image:"https://img.freepik.com/free-photo/kids-toy-guitar_1150-13984.jpg",desc:"Mini kids guitar for musical play."},
+    {name:"Push Car",price:"$37",image:"https://img.freepik.com/free-photo/kids-push-car-outdoors_1150-11954.jpg",desc:"Ride-on push car for young children."},
+    {name:"Play Tent",price:"$49",image:"https://img.freepik.com/free-photo/kids-play-tent-room_1150-13322.jpg",desc:"Colorful pop-up play tent for adventure."},
+    {name:"Stacking Rings",price:"$14",image:"https://img.freepik.com/free-photo/stacking-rings-baby-toy_1203-6909.jpg",desc:"Classic stacking rings baby toy."},
+    {name:"Plush Cat",price:"$23",image:"https://img.freepik.com/free-photo/cute-cat-plush-toy_1203-8722.jpg",desc:"Soft and cuddly cat plushie."},
+    {name:"Play Dough Set",price:"$18",image:"https://img.freepik.com/free-photo/play-dough-kids-toy-set_1150-16254.jpg",desc:"Non-toxic play dough with cutters."},
+    {name:"Crane Truck",price:"$32",image:"https://img.freepik.com/free-photo/crane-truck-toy-isolated_1150-11748.jpg",desc:"Moveable crane truck for building play."},
+    {name:"Toy Binoculars",price:"$15",image:"https://img.freepik.com/free-photo/kids-toy-binoculars-yellow_1150-12954.jpg",desc:"Yellow binoculars for young explorers."},
+    {name:"Toy Horse",price:"$26",image:"https://img.freepik.com/free-photo/plastic-toy-horse-white-background_1150-12168.jpg",desc:"Plastic horse for farm play."},
+    {name:"Bus Toy",price:"$20",image:"https://img.freepik.com/free-photo/plastic-toy-bus-white-background_1150-13368.jpg",desc:"Red and blue toy bus for pretend rides."},
+    {name:"Monkey Plush",price:"$24",image:"https://img.freepik.com/free-photo/monkey-plush-toy_1232-1981.jpg",desc:"Cheerful monkey plush for kids."},
+    {name:"Cooking Toys",price:"$21",image:"https://img.freepik.com/free-photo/toy-cooking-set-children_1150-13883.jpg",desc:"Mini cooking set for budding chefs."},
+    {name:"Toy Rocket",price:"$17",image:"https://img.freepik.com/free-photo/plastic-toy-rocket-white-background_1150-13344.jpg",desc:"Plastic rocket for launching play."},
+    {name:"Toy Ambulance",price:"$20",image:"https://img.freepik.com/free-photo/plastic-ambulance-toy-white-background_1150-14322.jpg",desc:"Ambulance rescue toy vehicle."},
+    {name:"Toy Drumset",price:"$33",image:"https://img.freepik.com/free-photo/kids-toy-drumset_1150-13981.jpg",desc:"Mini drum set for musical experiences."},
+    {name:"Toy Tractor",price:"$19",image:"https://img.freepik.com/free-photo/plastic-toy-tractor-white-background_1150-12322.jpg",desc:"Toy tractor for farm exploration."}
+  ];
+  // Render toy cards dynamically
+  const toyGrid = document.getElementById('toyGrid');
+  toys.forEach(toy => {
+    const card = document.createElement('div');
+    card.className = 'toy-card';
+    card.innerHTML = `
+      <img src="${toy.image}" class="toy-img" alt="${toy.name}">
+      <div class="toy-name">${toy.name}</div>
+      <div class="toy-price">${toy.price}</div>
+      <div class="toy-desc">${toy.desc}</div>
+    `;
+    toyGrid.appendChild(card);
+  });
 
-    // Download Catalog as HTML file (with images)
-    document.getElementById('downloadBtn').onclick = function() {
-      const htmlContent = `
-        <html><head><title>My Kid Toys Catalog</title></head><body>
-        <h1>My Kid Toys Catalog</h1>
-        <table border="1" cellpadding="8" style="border-collapse:collapse;">
+  // Download Catalog as HTML (with images)
+  document.getElementById('downloadBtn').onclick = function() {
+    const htmlContent = `
+      <html>
+      <head>
+      <title>My Kid Toys Catalog</title>
+      <style>
+      body {font-family:Poppins,Arial,sans-serif;background:#FFF2E3;color:#222;}
+      h1{color:#ff9800;text-align:center;}
+      table{margin:0 auto;border-collapse:collapse;width:97%;}
+      th,td{padding:10px;text-align:center;border:1px solid #efc36b;}
+      th{background:#ffb347;}
+      td img{width:60px;border-radius:6px;}
+      </style>
+      </head>
+      <body>
+      <h1>My Kid Toys Catalog</h1>
+      <table>
+      <tr>
+        <th>Image</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Description</th>
+      </tr>
+      ${toys.map(toy=>`
         <tr>
-          <th>Image</th>
-          <th>Name</th>
-          <th>Price</th>
-          <th>Description</th>
+          <td><img src="${toy.image}" /></td>
+          <td>${toy.name}</td>
+          <td>${toy.price}</td>
+          <td>${toy.desc}</td>
         </tr>
-        ${toys.map(toy => `
-          <tr>
-            <td><img src="${toy.image}" width="80" /></td>
-            <td>${toy.name}</td>
-            <td>${toy.price}</td>
-            <td>${toy.desc}</td>
-          </tr>
-        `).join('')}
-        </table>
-        </body></html>`;
-      // Create and save downloadable file
-      const blob = new Blob([htmlContent], {type: "text/html"});
-      const a = document.createElement('a');
-      a.href = URL.createObjectURL(blob);
-      a.download = "Kid_Toys_Catalog.html";
-      a.click();
-    };
-  </script>
+      `).join('')}
+      </table>
+      </body>
+      </html>
+    `;
+    // Download as file
+    const blob = new Blob([htmlContent],{type:"text/html"});
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = "Kid_Toys_Catalog.html";
+    a.click();
+  };
+</script>
 </body>
 </html>
