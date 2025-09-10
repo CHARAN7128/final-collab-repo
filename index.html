@@ -1,62 +1,227 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Admin Dashboard - Kid Toys Sales & Profits</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <title>Leo Toys - Admin Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
-    body { background: linear-gradient(135deg,#f3f8fd 0%,#f8efe8 100%);
-      font-family: 'Poppins', 'Segoe UI', Arial, sans-serif; margin:0;}
-    header { background: linear-gradient(90deg, #3949ab 70%, #ffb347 110%);
-      color:#fff; padding:2.2rem 2rem 1rem 2rem;
-      border-bottom-right-radius:42px; border-bottom-left-radius:42px; text-align:center;}
-    header h1 { font-size:2.4rem; margin:0 0 1rem 0; }
-    header p { font-size:1.09rem; margin:0; }
-    .dashboard { max-width:1350px;margin:2rem auto;background:#fff;border-radius:33px;
-      box-shadow: 0 0 22px #d9e8fb; padding:2.3rem 2.3rem 2rem 2.3rem;}
-    .section-title { font-size:1.38rem; color:#3949ab;font-weight:600; margin-bottom:1.3rem;}
-    .catalog-grid { display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:1rem;}
-    .toy-card { background:#e3f2fd; border-radius:14px; box-shadow:0 4px 8px rgba(60,60,60,0.07);
-      padding:1rem; text-align:center; display:flex; flex-direction:column;}
-    .toy-img { width:98px; height:98px; border-radius:12px; object-fit:cover; margin:0 auto 0.7rem auto;
-      box-shadow:0 2px 6px #90caf9; }
-    .toy-name { font-size:1.11rem; color:#512da8; margin-bottom:0.2rem; font-weight:500; }
-    .toy-price { font-size:1rem; color:#43a047; font-weight:700; margin-bottom:0.15rem; }
-    .toy-desc { font-size:0.90rem; color:#37474f; }
-    .stat-section { margin:2.8rem 0 0 0; padding:2rem;
-      background:#faf7fd; border-radius:28px; box-shadow:0 3px 17px #e1bee7;}
-    .stat-controls { margin-bottom:1.7rem; display:flex; gap:2rem; align-items:center; flex-wrap:wrap;}
-    .stat-controls label { font-weight:bold; color:#512da8;}
+    body {
+      background: linear-gradient(135deg, #f3f8fd 0%, #f8efe8 100%);
+      font-family: "Poppins", "Segoe UI", Arial, sans-serif;
+      margin: 0;
+    }
+    header {
+      background: linear-gradient(90deg, #3949ab 70%, #ffb347 110%);
+      color: #fff;
+      padding: 1.8rem 2rem 1rem 2rem;
+      border-bottom-right-radius: 42px;
+      border-bottom-left-radius: 42px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+    .logo-section {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .logo-img {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      border: 3px solid #ffb347;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      color: #3949ab;
+      font-size: 1.8rem;
+      font-family: "Comic Sans MS", cursive, sans-serif;
+      user-select: none;
+      box-shadow: 0 0 8px #ffb347a0;
+    }
+    h1 {
+      font-size: 2.2rem;
+      margin: 0;
+      font-family: "Poppins", "Segoe UI", sans-serif;
+      letter-spacing: 0.06em;
+      white-space: nowrap;
+      user-select: none;
+    }
+    header p {
+      font-size: 1.06rem;
+      margin: 0;
+      margin-top: 0.2rem;
+      flex-basis: 100%;
+      flex-grow: 1;
+      color: #f3f1f1dd;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+    }
+
+    main.dashboard {
+      max-width: 1350px;
+      margin: 2.5rem auto;
+      background: #fff;
+      border-radius: 33px;
+      box-shadow: 0 0 22px #d9e8fb;
+      padding: 2.8rem 2.8rem 2.2rem 2.8rem;
+    }
+    .section-title {
+      font-size: 1.48rem;
+      color: #3949ab;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      border-left: 6px solid #ffb347;
+      padding-left: 0.8rem;
+      user-select: none;
+    }
+    .catalog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 1rem;
+    }
+    .toy-card {
+      background: #e3f2fd;
+      border-radius: 14px;
+      box-shadow: 0 4px 10px rgba(60, 60, 60, 0.07);
+      padding: 1rem;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s ease, box-shadow 0.3s ease;
+      cursor: default;
+    }
+    .toy-card:hover {
+      transform: translateY(-5px) scale(1.04);
+      box-shadow: 0 10px 20px rgba(255, 179, 71, 0.4);
+      background: #fff9f0;
+    }
+    .toy-img {
+      width: 98px;
+      height: 98px;
+      border-radius: 12px;
+      object-fit: cover;
+      margin: 0 auto 0.7rem auto;
+      box-shadow: 0 2px 8px #90caf9;
+      border: 2.7px solid #ffb347;
+      background: #fff;
+    }
+    .toy-name {
+      font-size: 1.12rem;
+      color: #512da8;
+      margin-bottom: 0.2rem;
+      font-weight: 600;
+      user-select: text;
+    }
+    .toy-price {
+      font-size: 1rem;
+      color: #43a047;
+      font-weight: 700;
+      margin-bottom: 0.15rem;
+      user-select: text;
+    }
+    .toy-desc {
+      font-size: 0.9rem;
+      color: #37474f;
+      user-select: text;
+    }
+    .stat-section {
+      margin: 3rem 0 0 0;
+      padding: 2.2rem 2.2rem 2rem 2.2rem;
+      background: #faf7fd;
+      border-radius: 28px;
+      box-shadow: 0 3px 25px #e1bee7;
+      user-select: none;
+    }
+    .stat-controls {
+      margin-bottom: 1.7rem;
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .stat-controls label {
+      font-weight: bold;
+      color: #512da8;
+    }
     #downloadStatsBtn {
-      background: linear-gradient(90deg,#3949ab,#ffb347); color:#fff;font-size:1.08rem;border:none;
-      border-radius:11px;padding:0.65rem 1.8rem;cursor:pointer;font-weight:bold;
-      box-shadow:0 2px 6px #bbd2f3;margin-right:2rem;}
-    #downloadStatsBtn:hover { background:linear-gradient(90deg,#ffb347,#3949ab);}
-    .footer {text-align:center; margin:2.6rem 0 1.2rem 0;color:#aaa;font-size:0.97rem;}
-    @media screen and (max-width:1000px){
-      .dashboard{padding:1rem;}
-      .section-title{font-size:1.07rem;}
-      .stat-section{padding:1rem;}
+      background: linear-gradient(90deg, #3949ab, #ffb347);
+      color: #fff;
+      font-size: 1.1rem;
+      border: none;
+      border-radius: 11px;
+      padding: 0.65rem 1.8rem;
+      cursor: pointer;
+      font-weight: 600;
+      box-shadow: 0 2px 8px #bbd2f3;
+      margin-right: 2rem;
+      transition: background 0.2s;
+      user-select: none;
+    }
+    #downloadStatsBtn:hover {
+      background: linear-gradient(90deg, #ffb347, #3949ab);
+    }
+    #statMonth {
+      font-size: 1.05rem;
+      padding: 0.28rem 0.7rem;
+      border-radius: 6px;
+      border: 1.5px solid #512da8;
+      color: #512da8;
+      cursor: pointer;
+      user-select: none;
+    }
+    .footer {
+      text-align: center;
+      margin: 2.9rem 0 1.3rem 0;
+      color: #aaa;
+      font-size: 0.97rem;
+      user-select: none;
+    }
+    @media screen and (max-width: 1000px) {
+      main.dashboard {
+        padding: 1rem;
+      }
+      .section-title {
+        font-size: 1.18rem;
+      }
+      .stat-section {
+        padding: 1rem;
+      }
+      header {
+        justify-content: center;
+      }
+      header p {
+        margin-top: 0.4rem;
+        max-width: 280px;
+      }
     }
   </style>
 </head>
 <body>
 <header>
-  <h1>Admin Dashboard - Kid Toys Sales & Profits</h1>
-  <p>Admin panel for managing catalog, viewing image-rich plastic toys, and statistics on sales & profit.</p>
+  <div class="logo-section" aria-label="Logo and Store Name">
+    <div class="logo-img" aria-hidden="true">L</div>
+    <h1>Leo Toys</h1>
+  </div>
+  <p>Welcome Admin! Manage the catalog and analyze sales & profits.</p>
 </header>
-<main class="dashboard">
-  <section>
-    <div class="section-title">Catalog: Real Plastic Kids Toys</div>
+<main class="dashboard" role="main">
+  <section aria-label="Toy Catalog Section">
+    <h2 class="section-title">Catalog & Kids Playing with Toys</h2>
     <div class="catalog-grid" id="toyGrid"></div>
   </section>
-  <section class="stat-section">
-    <div class="section-title">Sales & Profits Statistics</div>
+  <section class="stat-section" aria-label="Sales and Profit Statistics Section">
+    <h2 class="section-title">Sales & Profits Statistics</h2>
     <div class="stat-controls">
-      <button id="downloadStatsBtn">Download Profits Data (CSV)</button>
-      <label for="statMonth">Month:</label>
-      <select id="statMonth">
-        <option value="all">All</option>
+      <button id="downloadStatsBtn" aria-label="Download sales and profits data as CSV file">
+        Download Profits Data (CSV)
+      </button>
+      <label for="statMonth">Filter by Month:</label>
+      <select id="statMonth" name="statMonth" aria-controls="salesChart" aria-label="Select month to filter profits chart">
+        <option value="all">All Year</option>
         <option value="jan">January</option>
         <option value="feb">February</option>
         <option value="mar">March</option>
@@ -66,154 +231,419 @@
         <option value="jul">July</option>
         <option value="aug">August</option>
         <option value="sep">September</option>
+        <option value="oct">October</option>
+        <option value="nov">November</option>
+        <option value="dec">December</option>
       </select>
     </div>
-    <canvas id="salesChart" width="900" height="320"
-      style="margin:auto;display:block"></canvas>
+    <canvas id="salesChart" width="900" height="350" style="margin:auto;display:block" role="img" aria-label="Sales profit statistics chart"></canvas>
   </section>
 </main>
-<div class="footer">Powered by Freepik real plastic toy photos · Admin statistics & profits[1][3][20]</div>
+<footer class="footer">
+  Powered by Freepik real plastic toy & kids playing photos · Admin statistics & profits · Leo Toys 2025
+</footer>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-  // Plastic toy catalog with images, plastic toys from Freepik [1][20]
+  // Expanded catalog of plastic toys replaced with kids playing images from Freepik [web:55][web:58][web:73]
   const toys = [
     {
-      name:"Plastic Playset",
-      price:"$14",
-      image:"https://img.freepik.com/free-photo/colorful-plastic-toy-playset_1150-13819.jpg", // Freepik
-      desc:"A colorful plastic playset for imaginative play."
+      name: "Colorful Kids Building Blocks",
+      price: "$16",
+      image:
+        "https://img.freepik.com/free-photo/group-kids-playing-multicolored-wooden-blocks_23-2148498656.jpg",
+      desc: "Children having fun building with colorful wooden blocks."
     },
     {
-      name:"Plastic Toy Train",
-      price:"$19",
-      image:"https://img.freepik.com/free-photo/plastic-toy-train-white-background_1150-13329.jpg",
-      desc:"Classic plastic train toy for young children."
+      name: "Child Playing with Plastic Toy Car",
+      price: "$12",
+      image:
+        "https://img.freepik.com/free-photo/little-boy-playing-with-red-toy-car_144627-26082.jpg",
+      desc: "Engaged kid enjoying a red plastic toy car."
     },
     {
-      name:"Plastic Robot",
-      price:"$18",
-      image:"https://img.freepik.com/free-photo/plastic-toy-robot-white-background_1150-11553.jpg",
-      desc:"Futuristic plastic robot toy for kids."
+      name: "Kids Playing with Educational Toys",
+      price: "$20",
+      image:
+        "https://img.freepik.com/free-photo/kids-playing-educational-toys_53876-90168.jpg",
+      desc: "Group of children learning and playing with educational toys."
     },
     {
-      name:"Plastic Toy Car",
-      price:"$13",
-      image:"https://img.freepik.com/free-photo/plastic-toy-car-white-background_1150-12153.jpg",
-      desc:"Durable plastic car toy for racing fun."
+      name: "Girl Playing with Toy Doll",
+      price: "$22",
+      image:
+        "https://img.freepik.com/free-photo/little-girl-playing-with-doll_144627-15037.jpg",
+      desc: "Young girl bonding with her toy doll."
     },
     {
-      name:"Plastic Toy Airplane",
-      price:"$15",
-      image:"https://img.freepik.com/free-photo/plastic-toy-airplane-white-background_1150-12341.jpg",
-      desc:"Bright colored airplane for take-off adventures."
+      name: "Toddler Playing with Stacking Rings",
+      price: "$14",
+      image:
+        "https://img.freepik.com/free-photo/little-baby-playing-with-toys_1203-6845.jpg",
+      desc: "Toddler practicing motor skills with stacking rings toy."
+    },
+    {
+      name: "Children Playing with Toy Trains",
+      price: "$18",
+      image:
+        "https://img.freepik.com/free-photo/close-up-child-hands-playing-toy-train_53876-90181.jpg",
+      desc: "Kids playing with detailed toy train sets."
+    },
+    {
+      name: "Kids Playing with Plastic Robot Toy",
+      price: "$19",
+      image:
+        "https://img.freepik.com/free-photo/kids-playing-with-plastic-robot_1203-2585.jpg",
+      desc: "Bright plastic robot toy captures kids' imaginations."
+    },
+    {
+      name: "Children Enjoying Outdoor Toy Play",
+      price: "$21",
+      image:
+        "https://img.freepik.com/free-photo/kids-playing-outdoor-toy_144627-32846.jpg",
+      desc: "Kids having fun playing with toys outdoors."
+    },
+    {
+      name: "Boy Enjoying Toy Airplane",
+      price: "$17",
+      image:
+        "https://img.freepik.com/free-photo/boy-flying-toy-airplane_144627-26527.jpg",
+      desc: "Excited boy playing with a plastic toy airplane."
+    },
+    {
+      name: "Girls Playing with Dollhouses",
+      price: "$23",
+      image:
+        "https://img.freepik.com/free-photo/kids-playing-with-dollhouse_144627-21098.jpg",
+      desc: "Girls enjoy imaginative play with dollhouses."
     }
-    // Add more plastic toys per need...
   ];
-  const toyGrid = document.getElementById('toyGrid');
-  toys.forEach(toy => {
-    const card = document.createElement('div');
-    card.className = 'toy-card';
-    card.innerHTML = `<img src="${toy.image}" class="toy-img" alt="${toy.name}">
+
+  // Render toy catalog cards
+  const toyGrid = document.getElementById("toyGrid");
+  toys.forEach((toy) => {
+    const card = document.createElement("div");
+    card.className = "toy-card";
+    card.innerHTML = `
+      <img src="${toy.image}" alt="${toy.name}" class="toy-img" loading="lazy" />
       <div class="toy-name">${toy.name}</div>
       <div class="toy-price">${toy.price}</div>
-      <div class="toy-desc">${toy.desc}</div>`;
+      <div class="toy-desc">${toy.desc}</div>
+    `;
     toyGrid.appendChild(card);
   });
 
-  // Sales (Units Sold), Revenue, Cost, Profit Data
-  let sales = [
-    {month:"jan",PlasticPlayset:{units:115,revenue:1610,cost:920,profit:690},
-                PlasticToyTrain:{units:92,revenue:1748,cost:1095,profit:653},
-                PlasticRobot:{units:86,revenue:1548,cost:1160,profit:388},
-                PlasticToyCar:{units:132,revenue:1716,cost:904,profit:812},
-                PlasticToyAirplane:{units:74,revenue:1110,cost:755,profit:355}},
-    {month:"feb",PlasticPlayset:{units:98,revenue:1372,cost:784,profit:588},
-                PlasticToyTrain:{units:114,revenue:2166,cost:1270,profit:896},
-                PlasticRobot:{units:63,revenue:1134,cost:895,profit:239},
-                PlasticToyCar:{units:110,revenue:1430,cost:770,profit:660},
-                PlasticToyAirplane:{units:81,revenue:1215,cost:857,profit:358}},
-    {month:"mar",PlasticPlayset:{units:122,revenue:1708,cost:1003,profit:705},
-                PlasticToyTrain:{units:105,revenue:1995,cost:1289,profit:706},
-                PlasticRobot:{units:94,revenue:1692,cost:1242,profit:450},
-                PlasticToyCar:{units:120,revenue:1560,cost:888,profit:672},
-                PlasticToyAirplane:{units:88,revenue:1320,cost:912,profit:408}},
-    {month:"apr",PlasticPlayset:{units:101,revenue:1414,cost:810,profit:604},
-                PlasticToyTrain:{units:97,revenue:1843,cost:1192,profit:651},
-                PlasticRobot:{units:70,revenue:1260,cost:945,profit:315},
-                PlasticToyCar:{units:105,revenue:1365,cost:790,profit:575},
-                PlasticToyAirplane:{units:66,revenue:990,cost:693,profit:297}},
-    {month:"may",PlasticPlayset:{units:89,revenue:1246,cost:712,profit:534},
-                PlasticToyTrain:{units:101,revenue:1923,cost:1212,profit:711},
-                PlasticRobot:{units:76,revenue:1368,cost:950,profit:418},
-                PlasticToyCar:{units:85,revenue:1105,cost:610,profit:495},
-                PlasticToyAirplane:{units:90,revenue:1350,cost:960,profit:390}},
-    // Add months as needed
+  // Sales Data for past year (12 months) including revenue, cost, and profit
+  const salesData = [
+    {
+      month: "jan",
+      ColorfulKidsBuildingBlocks: { units: 130, revenue: 2080, cost: 1350, profit: 730 },
+      ChildPlayingPlasticToyCar: { units: 105, revenue: 1260, cost: 735, profit: 525 },
+      KidsPlayingEducationalToys: { units: 85, revenue: 1700, cost: 1200, profit: 500 },
+      GirlPlayingToyDoll: { units: 92, revenue: 2024, cost: 1325, profit: 699 },
+      ToddlerPlayingStackingRings: { units: 110, revenue: 1540, cost: 900, profit: 640 },
+      ChildrenPlayingToyTrains: { units: 75, revenue: 1350, cost: 860, profit: 490 },
+      KidsPlayingPlasticRobotToy: { units: 105, revenue: 1995, cost: 1400, profit: 595 },
+      ChildrenEnjoyingOutdoorToyPlay: { units: 120, revenue: 2520, cost: 1720, profit: 800 },
+      BoyEnjoyingToyAirplane: { units: 90, revenue: 1530, cost: 1035, profit: 495 },
+      GirlsPlayingDollhouses: { units: 100, revenue: 2300, cost: 1650, profit: 650 }
+    },
+    {
+      month: "feb",
+      ColorfulKidsBuildingBlocks: { units: 112, revenue: 1792, cost: 1150, profit: 642 },
+      ChildPlayingPlasticToyCar: { units: 112, revenue: 1344, cost: 815, profit: 529 },
+      KidsPlayingEducationalToys: { units: 78, revenue: 1560, cost: 1050, profit: 510 },
+      GirlPlayingToyDoll: { units: 98, revenue: 2156, cost: 1420, profit: 736 },
+      ToddlerPlayingStackingRings: { units: 94, revenue: 1316, cost: 700, profit: 616 },
+      ChildrenPlayingToyTrains: { units: 80, revenue: 1440, cost: 910, profit: 530 },
+      KidsPlayingPlasticRobotToy: { units: 108, revenue: 2052, cost: 1480, profit: 572 },
+      ChildrenEnjoyingOutdoorToyPlay: { units: 123, revenue: 2583, cost: 1780, profit: 803 },
+      BoyEnjoyingToyAirplane: { units: 95, revenue: 1615, cost: 1100, profit: 515 },
+      GirlsPlayingDollhouses: { units: 94, revenue: 2162, cost: 1585, profit: 577 }
+    },
+    {
+      month: "mar",
+      ColorfulKidsBuildingBlocks: { units: 140, revenue: 2240, cost: 1550, profit: 690 },
+      ChildPlayingPlasticToyCar: { units: 120, revenue: 1440, cost: 880, profit: 560 },
+      KidsPlayingEducationalToys: { units: 95, revenue: 1900, cost: 1300, profit: 600 },
+      GirlPlayingToyDoll: { units: 110, revenue: 2420, cost: 1700, profit: 720 },
+      ToddlerPlayingStackingRings: { units: 126, revenue: 1764, cost: 1120, profit: 644 },
+      ChildrenPlayingToyTrains: { units: 85, revenue: 1530, cost: 980, profit: 550 },
+      KidsPlayingPlasticRobotToy: { units: 115, revenue: 2185, cost: 1540, profit: 645 },
+      ChildrenEnjoyingOutdoorToyPlay: { units: 115, revenue: 2415, cost: 1650, profit: 765 },
+      BoyEnjoyingToyAirplane: { units: 102, revenue: 1734, cost: 1200, profit: 534 },
+      GirlsPlayingDollhouses: { units: 111, revenue: 2553, cost: 1855, profit: 698 }
+    },
+    {
+      month: "apr",
+      ColorfulKidsBuildingBlocks: { units: 105, revenue: 1680, cost: 1200, profit: 480 },
+      ChildPlayingPlasticToyCar: { units: 115, revenue: 1380, cost: 830, profit: 550 },
+      KidsPlayingEducationalToys: { units: 75, revenue: 1500, cost: 1100, profit: 400 },
+      GirlPlayingToyDoll: { units: 101, revenue: 2222, cost: 1525, profit: 697 },
+      ToddlerPlayingStackingRings: { units: 98, revenue: 1372, cost: 920, profit: 452 },
+      ChildrenPlayingToyTrains: { units: 83, revenue: 1490, cost: 930, profit: 560 },
+      KidsPlayingPlasticRobotToy: { units: 100, revenue: 1900, cost: 1450, profit: 450 },
+      ChildrenEnjoyingOutdoorToyPlay: { units: 112, revenue: 2350, cost: 1725, profit: 625 },
+      BoyEnjoyingToyAirplane: { units: 88, revenue: 1496, cost: 990, profit: 506 },
+      GirlsPlayingDollhouses: { units: 100, revenue: 2300, cost: 1680, profit: 620 }
+    },
+    {
+      month: "may",
+      ColorfulKidsBuildingBlocks: { units: 115, revenue: 1840, cost: 1340, profit: 500 },
+      ChildPlayingPlasticToyCar: { units: 97, revenue: 1164, cost: 720, profit: 444 },
+      KidsPlayingEducationalToys: { units: 88, revenue: 1760, cost: 1250, profit: 510 },
+      GirlPlayingToyDoll: { units: 120, revenue: 2640, cost: 1850, profit: 790 },
+      ToddlerPlayingStackingRings: { units: 103, revenue: 1442, cost: 1000, profit: 442 },
+      ChildrenPlayingToyTrains: { units: 90, revenue: 1620, cost: 1055, profit: 565 },
+      KidsPlayingPlasticRobotToy: { units: 118, revenue: 2210, cost: 1590, profit: 620 },
+      ChildrenEnjoyingOutdoorToyPlay: { units: 109, revenue: 2285, cost: 1580, profit: 705 },
+      BoyEnjoyingToyAirplane: { units: 92, revenue: 1564, cost: 1040, profit: 524 },
+      GirlsPlayingDollhouses: { units: 105, revenue: 2415, cost: 1710, profit: 705 }
+    },
+    {
+      month: "jun",
+      ColorfulKidsBuildingBlocks: { units: 120, revenue: 1920, cost: 1410, profit: 510 },
+      ChildPlayingPlasticToyCar: { units: 105, revenue: 1260, cost: 790, profit: 470 },
+      KidsPlayingEducationalToys: { units: 85, revenue: 1700, cost: 1200, profit: 500 },
+      GirlPlayingToyDoll: { units: 115, revenue: 2530, cost: 1775, profit: 755 },
+      ToddlerPlayingStackingRings: { units: 110, revenue: 1540, cost: 1025, profit: 515 },
+      ChildrenPlayingToyTrains: { units: 87, revenue: 1566, cost: 1000, profit: 566 },
+      KidsPlayingPlasticRobotToy: { units: 120, revenue: 2250, cost: 1620, profit: 630 },
+      ChildrenEnjoyingOutdoorToyPlay: { units: 117, revenue: 2457, cost: 1660, profit: 797 },
+      BoyEnjoyingToyAirplane: { units: 95, revenue: 1615, cost: 1120, profit: 495 },
+      GirlsPlayingDollhouses: { units: 110, revenue: 2530, cost: 1820, profit: 710 }
+    },
+    {
+      month: "jul",
+      ColorfulKidsBuildingBlocks: { units: 125, revenue: 2000, cost: 1480, profit: 520 },
+      ChildPlayingPlasticToyCar: { units: 110, revenue: 1320, cost: 840, profit: 480 },
+      KidsPlayingEducationalToys: { units: 95, revenue: 1900, cost: 1400, profit: 500 },
+      GirlPlayingToyDoll: { units: 120, revenue: 2640, cost: 1850, profit: 790 },
+      ToddlerPlayingStackingRings: { units: 115, revenue: 1610, cost: 1070, profit: 540 },
+      ChildrenPlayingToyTrains: { units: 90, revenue: 1620, cost: 1055, profit: 565 },
+      KidsPlayingPlasticRobotToy: { units: 125, revenue: 2365, cost: 1700, profit: 665 },
+      ChildrenEnjoyingOutdoorToyPlay: { units: 119, revenue: 2501, cost: 1690, profit: 811 },
+      BoyEnjoyingToyAirplane: { units: 100, revenue: 1700, cost: 1180, profit: 520 },
+      GirlsPlayingDollhouses: { units: 115, revenue: 2645, cost: 1900, profit: 745 }
+    },
+    {
+      month: "aug",
+      ColorfulKidsBuildingBlocks: { units: 118, revenue: 1888, cost: 1400, profit: 488 },
+      ChildPlayingPlasticToyCar: { units: 106, revenue: 1272, cost: 810, profit: 462 },
+      KidsPlayingEducationalToys: { units: 90, revenue: 1800, cost: 1300, profit: 500 },
+      GirlPlayingToyDoll: { units: 110, revenue: 2420, cost: 1700, profit: 720 },
+      ToddlerPlayingStackingRings: { units: 113, revenue: 1586, cost: 1080, profit: 506 },
+      ChildrenPlayingToyTrains: { units: 85, revenue: 1530, cost: 980, profit: 550 },
+      KidsPlayingPlasticRobotToy: { units: 117, revenue: 2214, cost: 1600, profit: 614 },
+      ChildrenEnjoyingOutdoorToyPlay: { units: 115, revenue: 2415, cost: 1650, profit: 765 },
+      BoyEnjoyingToyAirplane: { units: 98, revenue: 1666, cost: 1150, profit: 516 },
+      GirlsPlayingDollhouses: { units: 112, revenue: 2576, cost: 1850, profit: 726 }
+    },
+    {
+      month: "sep",
+      ColorfulKidsBuildingBlocks: { units: 110, revenue: 1760, cost: 1350, profit: 410 },
+      ChildPlayingPlasticToyCar: { units: 102, revenue: 1224, cost: 770, profit: 454 },
+      KidsPlayingEducationalToys: { units: 82, revenue: 1640, cost: 1100, profit: 540 },
+      GirlPlayingToyDoll: { units: 109, revenue: 2398, cost: 1680, profit: 718 },
+      ToddlerPlayingStackingRings: { units: 105, revenue: 1470, cost: 950, profit: 520 },
+      ChildrenPlayingToyTrains: { units: 82, revenue: 1478, cost: 920, profit: 558 },
+      KidsPlayingPlasticRobotToy: { units: 113, revenue: 2139, cost: 1550, profit: 589 },
+      ChildrenEnjoyingOutdoorToyPlay: { units: 112, revenue: 2350, cost: 1650, profit: 700 },
+      BoyEnjoyingToyAirplane: { units: 95, revenue: 1615, cost: 1100, profit: 515 },
+      GirlsPlayingDollhouses: { units: 110, revenue: 2530, cost: 1820, profit: 710 }
+    },
+    {
+      month: "oct",
+      ColorfulKidsBuildingBlocks: { units: 120, revenue: 1920, cost: 1400, profit: 520 },
+      ChildPlayingPlasticToyCar: { units: 108, revenue: 1296, cost: 825, profit: 471 },
+      KidsPlayingEducationalToys: { units: 87, revenue: 1740, cost: 1200, profit: 540 },
+      GirlPlayingToyDoll: { units: 115, revenue: 2530, cost: 1780, profit: 750 },
+      ToddlerPlayingStackingRings: { units: 116, revenue: 1616, cost: 1080, profit: 536 },
+      ChildrenPlayingToyTrains: { units: 90, revenue: 1620, cost: 1054, profit: 566 },
+      KidsPlayingPlasticRobotToy: { units: 120, revenue: 2280, cost: 1650, profit: 630 },
+      ChildrenEnjoyingOutdoorToyPlay: { units: 118, revenue: 2470, cost: 1700, profit: 770 },
+      BoyEnjoyingToyAirplane: { units: 98, revenue: 1666, cost: 1140, profit: 526 },
+      GirlsPlayingDollhouses: { units: 113, revenue: 2599, cost: 1850, profit: 749 }
+    },
+    {
+      month: "nov",
+      ColorfulKidsBuildingBlocks: { units: 130, revenue: 2080, cost: 1500, profit: 580 },
+      ChildPlayingPlasticToyCar: { units: 115, revenue: 1380, cost: 880, profit: 500 },
+      KidsPlayingEducationalToys: { units: 92, revenue: 1840, cost: 1350, profit: 490 },
+      GirlPlayingToyDoll: { units: 120, revenue: 2640, cost: 1900, profit: 740 },
+      ToddlerPlayingStackingRings: { units: 120, revenue: 1680, cost: 1150, profit: 530 },
+      ChildrenPlayingToyTrains: { units: 95, revenue: 1710, cost: 1100, profit: 610 },
+      KidsPlayingPlasticRobotToy: { units: 130, revenue: 2470, cost: 1750, profit: 720 },
+      ChildrenEnjoyingOutdoorToyPlay: { units: 123, revenue: 2567, cost: 1800, profit: 767 },
+      BoyEnjoyingToyAirplane: { units: 102, revenue: 1734, cost: 1200, profit: 534 },
+      GirlsPlayingDollhouses: { units: 120, revenue: 2760, cost: 2050, profit: 710 }
+    },
+    {
+      month: "dec",
+      ColorfulKidsBuildingBlocks: { units: 140, revenue: 2240, cost: 1600, profit: 640 },
+      ChildPlayingPlasticToyCar: { units: 120, revenue: 1440, cost: 900, profit: 540 },
+      KidsPlayingEducationalToys: { units: 100, revenue: 2000, cost: 1500, profit: 500 },
+      GirlPlayingToyDoll: { units: 130, revenue: 2860, cost: 2100, profit: 760 },
+      ToddlerPlayingStackingRings: { units: 130, revenue: 1820, cost: 1200, profit: 620 },
+      ChildrenPlayingToyTrains: { units: 105, revenue: 1890, cost: 1200, profit: 690 },
+      KidsPlayingPlasticRobotToy: { units: 135, revenue: 2430, cost: 1780, profit: 650 },
+      ChildrenEnjoyingOutdoorToyPlay: { units: 130, revenue: 2730, cost: 1800, profit: 930 },
+      BoyEnjoyingToyAirplane: { units: 110, revenue: 1870, cost: 1250, profit: 620 },
+      GirlsPlayingDollhouses: { units: 125, revenue: 2875, cost: 1950, profit: 925 }
+    }
   ];
-  const toyKeys = ["PlasticPlayset","PlasticToyTrain","PlasticRobot","PlasticToyCar","PlasticToyAirplane"];
-  const toyLabels = ["Plastic Playset", "Plastic Toy Train", "Plastic Robot", "Plastic Toy Car", "Plastic Toy Airplane"];
-  const months = ["jan","feb","mar","apr","may"];
-  const monthLabels = ["Jan","Feb","Mar","Apr","May"];
 
-  // Chart - show profits by toy over months
+  const toyKeys = [
+    "ColorfulKidsBuildingBlocks",
+    "ChildPlayingPlasticToyCar",
+    "KidsPlayingEducationalToys",
+    "GirlPlayingToyDoll",
+    "ToddlerPlayingStackingRings",
+    "ChildrenPlayingToyTrains",
+    "KidsPlayingPlasticRobotToy",
+    "ChildrenEnjoyingOutdoorToyPlay",
+    "BoyEnjoyingToyAirplane",
+    "GirlsPlayingDollhouses"
+  ];
+  const toyLabels = [
+    "Building Blocks",
+    "Plastic Toy Car",
+    "Educational Toys",
+    "Toy Doll",
+    "Stacking Rings",
+    "Toy Trains",
+    "Plastic Robot",
+    "Outdoor Toy Play",
+    "Toy Airplane",
+    "Dollhouses"
+  ];
+
+  const months = [
+    "jan",
+    "feb",
+    "mar",
+    "apr",
+    "may",
+    "jun",
+    "jul",
+    "aug",
+    "sep",
+    "oct",
+    "nov",
+    "dec"
+  ];
+  const monthLabels = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec"
+  ];
+
+  // Render toy catalog cards
+  const toyGrid = document.getElementById("toyGrid");
+  toys.forEach((toy) => {
+    const card = document.createElement("div");
+    card.className = "toy-card";
+    card.innerHTML = `
+      <img src="${toy.image}" alt="${toy.name}" class="toy-img" loading="lazy" />
+      <div class="toy-name">${toy.name}</div>
+      <div class="toy-price">${toy.price}</div>
+      <div class="toy-desc">${toy.desc}</div>
+    `;
+    toyGrid.appendChild(card);
+  });
+
+  // Chart: visualize profits for selected month or year
   let salesChart;
   function renderChart(selectedMonth) {
-    let chartLabels=[], chartDatasets=[];
-    if (selectedMonth==="all") {
+    let chartLabels = [],
+      chartDatasets = [];
+    if (selectedMonth === "all") {
       chartLabels = monthLabels;
       toyKeys.forEach((key, i) => {
         chartDatasets.push({
           label: toyLabels[i],
-          data: sales.map(s=>s[key].profit),
-          backgroundColor:`rgba(${(i+2)*45%255},${(i+1)*36%255},${(i+3)*85%255},0.55)`,
-          borderColor:`rgba(${(i+2)*45%255},${(i+1)*36%255},${(i+3)*85%255},0.85)`,
-          borderWidth:2,
-          type:"bar"
+          data: salesData.map((s) => s[key].profit),
+          backgroundColor: `rgba(${(i + 2) * 45 % 255},${(i + 1) * 36 % 255},${(i + 3) *
+            85 %
+            255},0.55)`,
+          borderColor: `rgba(${(i + 2) * 45 % 255},${(i + 1) * 36 % 255},${(i + 3) *
+            85 %
+            255},0.85)`,
+          borderWidth: 2,
+          type: "bar"
         });
       });
     } else {
       chartLabels = toyLabels;
-      let s = sales.find(a=>a.month===selectedMonth);
-      chartDatasets = [{
-        label:"Profit ($)",
-        data: toyKeys.map(key=>s[key].profit),
-        backgroundColor:"rgba(255,179,71,0.46)",
-        borderColor:"rgba(39,110,212,0.92)",
-        borderWidth:2,
-        type:"bar"
-      }];
+      let s = salesData.find((a) => a.month === selectedMonth);
+      chartDatasets = [
+        {
+          label: "Profit ($)",
+          data: toyKeys.map((key) => s[key].profit),
+          backgroundColor: "rgba(255,179,71,0.46)",
+          borderColor: "rgba(39,110,212,0.92)",
+          borderWidth: 2,
+          type: "bar"
+        }
+      ];
     }
     if (salesChart) salesChart.destroy();
-    let ctx = document.getElementById('salesChart').getContext('2d');
+    const ctx = document.getElementById("salesChart").getContext("2d");
     salesChart = new Chart(ctx, {
-      type:'bar',
-      data:{labels:chartLabels,datasets:chartDatasets},
-      options:{
-        responsive:true,
-        plugins:{legend:{position:"top"},title:{display:true,text:"Toy Sales Profit Statistics"}},
-        scales:{y:{beginAtZero:true},x:{}}
+      type: "bar",
+      data: { labels: chartLabels, datasets: chartDatasets },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { position: "top" },
+          title: {
+            display: true,
+            text: "Toy Sales Profit Statistics (in USD)"
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            ticks: {
+              callback: function (value) {
+                return "$" + value;
+              }
+            }
+          },
+          x: {}
+        }
       }
     });
   }
-  document.getElementById('statMonth').onchange = function() {
+
+  document.getElementById("statMonth").onchange = function () {
     renderChart(this.value);
   };
-  renderChart('all');
+  renderChart("all");
 
-  // Download Profits Data as CSV
-  document.getElementById('downloadStatsBtn').onclick = function() {
-    let rows = ["Month,"+toyLabels.join(",")];
-    sales.forEach(s=>{
-      let r = [s.month.toUpperCase()+s.month.slice(1)];
-      toyKeys.forEach(key=>r.push(s[key].profit));
+  // CSV download of profits data
+  document.getElementById("downloadStatsBtn").onclick = function () {
+    let rows = ["Month," + toyLabels.join(",")];
+    salesData.forEach((s) => {
+      let r = [s.month[0].toUpperCase() + s.month.slice(1)];
+      toyKeys.forEach((key) => r.push(s[key].profit));
       rows.push(r.join(","));
     });
-    let csv=rows.join("\n");
-    let blob = new Blob([csv],{type:"text/csv"});
-    let a = document.createElement('a');
+    const csv = rows.join("\n");
+    const blob = new Blob([csv], { type: "text/csv" });
+    const a = document.createElement("a");
     a.href = URL.createObjectURL(blob);
-    a.download = "Toy_Profits_Statistics.csv";
+    a.download = "LeoToys_Profits_Statistics_2024.csv";
     a.click();
-  }
+  };
 </script>
 </body>
 </html>
