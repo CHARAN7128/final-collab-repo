@@ -2,61 +2,58 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Admin Dashboard - Kid Toys Sales</title>
+  <title>Admin Dashboard - Kid Toys Sales & Profits</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body { background: linear-gradient(135deg,#f3f8fd 0%,#f8efe8 100%);
-      font-family: 'Poppins', 'Segoe UI', Arial, sans-serif; margin:0; }
-    header {
-      background: linear-gradient(90deg, #3949ab 70%, #ffb347 110%);
+      font-family: 'Poppins', 'Segoe UI', Arial, sans-serif; margin:0;}
+    header { background: linear-gradient(90deg, #3949ab 70%, #ffb347 110%);
       color:#fff; padding:2.2rem 2rem 1rem 2rem;
-      border-bottom-right-radius:42px;
-      border-bottom-left-radius:42px;
-      text-align:center;
-    }
-    header h1 { font-size:2.5rem; margin:0 0 1rem 0; font-family:'Poppins','Segoe UI',sans-serif; }
-    header p { font-size:1.13rem; margin:0; }
-    .dashboard { max-width:1350px; margin:2rem auto; background: #fff; border-radius:33px;
-      box-shadow: 0 0 22px #d9e8fb; padding:2.3rem 2.3rem 2rem 2.3rem; }
-    .section-title { font-size:1.6rem; color:#3949ab; font-weight:600; margin-bottom:1.2rem; }
-    .catalog-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:1rem; }
-    .toy-card { background:#e3f2fd; border-radius:14px; box-shadow:0 4px 8px rgba(60,60,60,0.07); padding:1rem;
-      text-align:center; display:flex;flex-direction:column; }
-    .toy-img { width:98px; height:98px; border-radius:12px; object-fit:cover; margin:0 auto 0.7rem auto; box-shadow:0 2px 6px #90caf9; }
-    .toy-name { font-size:1.1rem; color:#512da8; margin-bottom:0.2rem; font-weight:500; }
+      border-bottom-right-radius:42px; border-bottom-left-radius:42px; text-align:center;}
+    header h1 { font-size:2.4rem; margin:0 0 1rem 0; }
+    header p { font-size:1.09rem; margin:0; }
+    .dashboard { max-width:1350px;margin:2rem auto;background:#fff;border-radius:33px;
+      box-shadow: 0 0 22px #d9e8fb; padding:2.3rem 2.3rem 2rem 2.3rem;}
+    .section-title { font-size:1.38rem; color:#3949ab;font-weight:600; margin-bottom:1.3rem;}
+    .catalog-grid { display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:1rem;}
+    .toy-card { background:#e3f2fd; border-radius:14px; box-shadow:0 4px 8px rgba(60,60,60,0.07);
+      padding:1rem; text-align:center; display:flex; flex-direction:column;}
+    .toy-img { width:98px; height:98px; border-radius:12px; object-fit:cover; margin:0 auto 0.7rem auto;
+      box-shadow:0 2px 6px #90caf9; }
+    .toy-name { font-size:1.11rem; color:#512da8; margin-bottom:0.2rem; font-weight:500; }
     .toy-price { font-size:1rem; color:#43a047; font-weight:700; margin-bottom:0.15rem; }
-    .toy-desc { font-size:0.92rem; color:#37474f; }
-    .stat-section { margin:2.8rem 0 0 0; padding:2rem; background:#faf7fd; border-radius:28px; box-shadow:0 3px 17px #e1bee7; }
-    .stat-controls { margin-bottom:1.7rem; display:flex; gap:2rem; align-items:center; flex-wrap:wrap; }
-    .stat-controls label { font-weight:bold; color:#512da8; }
+    .toy-desc { font-size:0.90rem; color:#37474f; }
+    .stat-section { margin:2.8rem 0 0 0; padding:2rem;
+      background:#faf7fd; border-radius:28px; box-shadow:0 3px 17px #e1bee7;}
+    .stat-controls { margin-bottom:1.7rem; display:flex; gap:2rem; align-items:center; flex-wrap:wrap;}
+    .stat-controls label { font-weight:bold; color:#512da8;}
     #downloadStatsBtn {
-      background: linear-gradient(90deg,#3949ab,#ffb347); color:#fff; font-size:1.08rem; border:none;
-      border-radius:11px;padding:0.65rem 1.8rem; cursor:pointer; font-weight:bold; box-shadow:0 2px 6px #bbd2f3;
-      margin-right:2rem;
-    }
-    #downloadStatsBtn:hover { background:linear-gradient(90deg,#ffb347,#3949ab); }
-    .footer { text-align:center; margin:2.6rem 0 1.2rem 0; color:#aaa; font-size:0.98rem; }
+      background: linear-gradient(90deg,#3949ab,#ffb347); color:#fff;font-size:1.08rem;border:none;
+      border-radius:11px;padding:0.65rem 1.8rem;cursor:pointer;font-weight:bold;
+      box-shadow:0 2px 6px #bbd2f3;margin-right:2rem;}
+    #downloadStatsBtn:hover { background:linear-gradient(90deg,#ffb347,#3949ab);}
+    .footer {text-align:center; margin:2.6rem 0 1.2rem 0;color:#aaa;font-size:0.97rem;}
     @media screen and (max-width:1000px){
       .dashboard{padding:1rem;}
-      .section-title{font-size:1.28rem;}
+      .section-title{font-size:1.07rem;}
       .stat-section{padding:1rem;}
     }
   </style>
 </head>
 <body>
 <header>
-  <h1>Admin Dashboard - Kid Toys Sales</h1>
-  <p>Manage your toy catalog and view/download detailed sales statistics.</p>
+  <h1>Admin Dashboard - Kid Toys Sales & Profits</h1>
+  <p>Admin panel for managing catalog, viewing image-rich plastic toys, and statistics on sales & profit.</p>
 </header>
 <main class="dashboard">
   <section>
-    <div class="section-title">Product Catalog (Partial Demo)</div>
+    <div class="section-title">Catalog: Real Plastic Kids Toys</div>
     <div class="catalog-grid" id="toyGrid"></div>
   </section>
   <section class="stat-section">
-    <div class="section-title">Sales Statistics</div>
+    <div class="section-title">Sales & Profits Statistics</div>
     <div class="stat-controls">
-      <button id="downloadStatsBtn">Download Sales Data (CSV)</button>
+      <button id="downloadStatsBtn">Download Profits Data (CSV)</button>
       <label for="statMonth">Month:</label>
       <select id="statMonth">
         <option value="all">All</option>
@@ -71,21 +68,46 @@
         <option value="sep">September</option>
       </select>
     </div>
-    <!-- Chart goes here -->
-    <canvas id="salesChart" width="900" height="320" style="margin:auto;display:block"></canvas>
+    <canvas id="salesChart" width="900" height="320"
+      style="margin:auto;display:block"></canvas>
   </section>
 </main>
-<div class="footer">Admin dashboard · Sales stats & CSV download · Images via Freepik[21][22][23][5][9]</div>
+<div class="footer">Powered by Freepik real plastic toy photos · Admin statistics & profits[1][3][20]</div>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-  // ----- Toy Catalog Demo  -----
+  // Plastic toy catalog with images, plastic toys from Freepik [1][20]
   const toys = [
-    {name:"Rainbow Stacker",price:"$15",image:"https://img.freepik.com/free-photo/colorful-wooden-toy_1203-6907.jpg",desc:"Classic stacking toy with vibrant colors."},
-    {name:"Animal Puzzles",price:"$22",image:"https://img.freepik.com/free-photo/children-s-educational-toys-wooden-puzzles-with-animal-family_1150-9492.jpg",desc:"Interactive animal puzzles for problem solving."},
-    {name:"Toy Truck",price:"$18",image:"https://img.freepik.com/free-photo/kids-toy-truck-isolated-wood-background_1150-11184.jpg",desc:"Rugged toy truck for play."},
-    {name:"Building Blocks",price:"$25",image:"https://img.freepik.com/free-photo/kids-plastic-building-blocks-on-table_1232-1565.jpg",desc:"Interlocking blocks for creativity."},
-    {name:"Plush Teddy Bear",price:"$30",image:"https://img.freepik.com/free-photo/brown-plush-toy-white-background_1232-1263.jpg",desc:"Adorable teddy bear for cuddling."}
-    // Expand up to 50 toys for full catalog
+    {
+      name:"Plastic Playset",
+      price:"$14",
+      image:"https://img.freepik.com/free-photo/colorful-plastic-toy-playset_1150-13819.jpg", // Freepik
+      desc:"A colorful plastic playset for imaginative play."
+    },
+    {
+      name:"Plastic Toy Train",
+      price:"$19",
+      image:"https://img.freepik.com/free-photo/plastic-toy-train-white-background_1150-13329.jpg",
+      desc:"Classic plastic train toy for young children."
+    },
+    {
+      name:"Plastic Robot",
+      price:"$18",
+      image:"https://img.freepik.com/free-photo/plastic-toy-robot-white-background_1150-11553.jpg",
+      desc:"Futuristic plastic robot toy for kids."
+    },
+    {
+      name:"Plastic Toy Car",
+      price:"$13",
+      image:"https://img.freepik.com/free-photo/plastic-toy-car-white-background_1150-12153.jpg",
+      desc:"Durable plastic car toy for racing fun."
+    },
+    {
+      name:"Plastic Toy Airplane",
+      price:"$15",
+      image:"https://img.freepik.com/free-photo/plastic-toy-airplane-white-background_1150-12341.jpg",
+      desc:"Bright colored airplane for take-off adventures."
+    }
+    // Add more plastic toys per need...
   ];
   const toyGrid = document.getElementById('toyGrid');
   toys.forEach(toy => {
@@ -98,44 +120,62 @@
     toyGrid.appendChild(card);
   });
 
-  // ----- Sales Statistics Data -----
+  // Sales (Units Sold), Revenue, Cost, Profit Data
   let sales = [
-    {month:"jan", RainbowStacker:230, AnimalPuzzles:180, ToyTruck:210, BuildingBlocks:185, PlushTeddyBear:153},
-    {month:"feb", RainbowStacker:190, AnimalPuzzles:172, ToyTruck:195, BuildingBlocks:233, PlushTeddyBear:130},
-    {month:"mar", RainbowStacker:210, AnimalPuzzles:222, ToyTruck:218, BuildingBlocks:213, PlushTeddyBear:110},
-    {month:"apr", RainbowStacker:155, AnimalPuzzles:190, ToyTruck:188, BuildingBlocks:164, PlushTeddyBear:90},
-    {month:"may", RainbowStacker:175, AnimalPuzzles:160, ToyTruck:173, BuildingBlocks:180, PlushTeddyBear:142},
-    {month:"jun", RainbowStacker:199, AnimalPuzzles:210, ToyTruck:205, BuildingBlocks:191, PlushTeddyBear:124},
-    {month:"jul", RainbowStacker:205, AnimalPuzzles:230, ToyTruck:180, BuildingBlocks:170, PlushTeddyBear:128},
-    {month:"aug", RainbowStacker:216, AnimalPuzzles:187, ToyTruck:222, BuildingBlocks:200, PlushTeddyBear:115},
-    {month:"sep", RainbowStacker:130, AnimalPuzzles:140, ToyTruck:150, BuildingBlocks:120, PlushTeddyBear:95}
+    {month:"jan",PlasticPlayset:{units:115,revenue:1610,cost:920,profit:690},
+                PlasticToyTrain:{units:92,revenue:1748,cost:1095,profit:653},
+                PlasticRobot:{units:86,revenue:1548,cost:1160,profit:388},
+                PlasticToyCar:{units:132,revenue:1716,cost:904,profit:812},
+                PlasticToyAirplane:{units:74,revenue:1110,cost:755,profit:355}},
+    {month:"feb",PlasticPlayset:{units:98,revenue:1372,cost:784,profit:588},
+                PlasticToyTrain:{units:114,revenue:2166,cost:1270,profit:896},
+                PlasticRobot:{units:63,revenue:1134,cost:895,profit:239},
+                PlasticToyCar:{units:110,revenue:1430,cost:770,profit:660},
+                PlasticToyAirplane:{units:81,revenue:1215,cost:857,profit:358}},
+    {month:"mar",PlasticPlayset:{units:122,revenue:1708,cost:1003,profit:705},
+                PlasticToyTrain:{units:105,revenue:1995,cost:1289,profit:706},
+                PlasticRobot:{units:94,revenue:1692,cost:1242,profit:450},
+                PlasticToyCar:{units:120,revenue:1560,cost:888,profit:672},
+                PlasticToyAirplane:{units:88,revenue:1320,cost:912,profit:408}},
+    {month:"apr",PlasticPlayset:{units:101,revenue:1414,cost:810,profit:604},
+                PlasticToyTrain:{units:97,revenue:1843,cost:1192,profit:651},
+                PlasticRobot:{units:70,revenue:1260,cost:945,profit:315},
+                PlasticToyCar:{units:105,revenue:1365,cost:790,profit:575},
+                PlasticToyAirplane:{units:66,revenue:990,cost:693,profit:297}},
+    {month:"may",PlasticPlayset:{units:89,revenue:1246,cost:712,profit:534},
+                PlasticToyTrain:{units:101,revenue:1923,cost:1212,profit:711},
+                PlasticRobot:{units:76,revenue:1368,cost:950,profit:418},
+                PlasticToyCar:{units:85,revenue:1105,cost:610,profit:495},
+                PlasticToyAirplane:{units:90,revenue:1350,cost:960,profit:390}},
+    // Add months as needed
   ];
-  const toyNames = Object.keys(sales).filter(k=>k!=="month");
-  const months = ["jan","feb","mar","apr","may","jun","jul","aug","sep"];
-  const monthLabels = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep"];
+  const toyKeys = ["PlasticPlayset","PlasticToyTrain","PlasticRobot","PlasticToyCar","PlasticToyAirplane"];
+  const toyLabels = ["Plastic Playset", "Plastic Toy Train", "Plastic Robot", "Plastic Toy Car", "Plastic Toy Airplane"];
+  const months = ["jan","feb","mar","apr","may"];
+  const monthLabels = ["Jan","Feb","Mar","Apr","May"];
 
-  // ----- Render Chart -----
+  // Chart - show profits by toy over months
   let salesChart;
   function renderChart(selectedMonth) {
     let chartLabels=[], chartDatasets=[];
     if (selectedMonth==="all") {
-      chartLabels=monthLabels;
-      toyNames.forEach((toy,tp)=>{
+      chartLabels = monthLabels;
+      toyKeys.forEach((key, i) => {
         chartDatasets.push({
-          label:toy.replace(/([A-Z])/g, ' $1').trim(),
-          data: sales.map(s=>s[toy]),
-          backgroundColor:`rgba(${(tp+1)*34%255},${(tp+3)*43%255},${(tp+4)*24%255},0.55)`,
-          borderColor:`rgba(${(tp+1)*34%255},${(tp+3)*43%255},${(tp+4)*24%255},0.85)`,
+          label: toyLabels[i],
+          data: sales.map(s=>s[key].profit),
+          backgroundColor:`rgba(${(i+2)*45%255},${(i+1)*36%255},${(i+3)*85%255},0.55)`,
+          borderColor:`rgba(${(i+2)*45%255},${(i+1)*36%255},${(i+3)*85%255},0.85)`,
           borderWidth:2,
           type:"bar"
         });
       });
     } else {
-      chartLabels = toyNames.map(toy=>toy.replace(/([A-Z])/g, ' $1').trim());
+      chartLabels = toyLabels;
       let s = sales.find(a=>a.month===selectedMonth);
       chartDatasets = [{
-        label:"Units Sold",
-        data: toyNames.map(toy=>s[toy]),
+        label:"Profit ($)",
+        data: toyKeys.map(key=>s[key].profit),
         backgroundColor:"rgba(255,179,71,0.46)",
         borderColor:"rgba(39,110,212,0.92)",
         borderWidth:2,
@@ -144,12 +184,12 @@
     }
     if (salesChart) salesChart.destroy();
     let ctx = document.getElementById('salesChart').getContext('2d');
-    salesChart=new Chart(ctx, {
-      type: 'bar',
-      data: {labels:chartLabels,datasets:chartDatasets},
+    salesChart = new Chart(ctx, {
+      type:'bar',
+      data:{labels:chartLabels,datasets:chartDatasets},
       options:{
         responsive:true,
-        plugins:{legend:{position:"top"},title:{display:true,text:"Toy Sales Statistics"}},
+        plugins:{legend:{position:"top"},title:{display:true,text:"Toy Sales Profit Statistics"}},
         scales:{y:{beginAtZero:true},x:{}}
       }
     });
@@ -159,19 +199,19 @@
   };
   renderChart('all');
 
-  // ----- Download Sales Data as CSV -----
+  // Download Profits Data as CSV
   document.getElementById('downloadStatsBtn').onclick = function() {
-    let rows=["Month,"+toyNames.join(",")];
+    let rows = ["Month,"+toyLabels.join(",")];
     sales.forEach(s=>{
-      let r=[s.month.toUpperCase()+s.month.slice(1)];
-      toyNames.forEach(toy=>r.push(s[toy]));
+      let r = [s.month.toUpperCase()+s.month.slice(1)];
+      toyKeys.forEach(key=>r.push(s[key].profit));
       rows.push(r.join(","));
     });
     let csv=rows.join("\n");
     let blob = new Blob([csv],{type:"text/csv"});
     let a = document.createElement('a');
     a.href = URL.createObjectURL(blob);
-    a.download = "Toy_Sales_Statistics.csv";
+    a.download = "Toy_Profits_Statistics.csv";
     a.click();
   }
 </script>
