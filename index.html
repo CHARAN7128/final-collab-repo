@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Kid Toys Web Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body { background: #f7faff; font-family: 'Comic Sans MS', cursive, sans-serif; margin: 0; padding: 0;}
+    header { background: linear-gradient(90deg,#42a5f5,#7e57c2); color: #fff; padding: 2rem 2rem 1rem 2rem; box-shadow: 0 4px 10px rgba(50,50,50,0.1);}
+    header h1 { font-size: 2.5rem; margin: 0 0 0.5rem 0; letter-spacing: 1px;}
+    header p { font-size: 1.1rem; margin: 0; }
+    .dashboard { max-width:900px; margin:2rem auto; background: #fff; border-radius: 25px; box-shadow: 0 0 12px #d9e8fb; padding: 2rem;}
+    .catalog-section { margin-bottom:2rem;}
+    .catalog-title { font-size:1.6rem; color:#1e88e5; margin-bottom:1rem;}
+    .catalog-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); gap:1rem;}
+    .toy-card { background:#e3f2fd; border-radius:14px; box-shadow:0 4px 8px rgba(60,60,60,0.07); padding:1rem; text-align:center; display:flex;flex-direction:column;}
+    .toy-img { width:120px; height:120px; border-radius:12px; object-fit:cover; margin:0 auto 0.7rem auto; box-shadow:0 2px 6px #90caf9;}
+    .toy-name { font-size:1.1rem; color:#512da8;margin-bottom:0.4rem;}
+    .toy-price { font-size:1rem; color:#43a047;font-weight:700;margin-bottom:0.3rem;}
+    .toy-desc { font-size:0.95rem; color:#37474f;}
+    #downloadBtn { background:linear-gradient(90deg,#42a5f5,#7e57c2); color:#fff;font-size:1rem; border:none; border-radius:12px;padding:0.7rem 1.8rem;margin:2rem auto 0 auto;display:block;cursor:pointer; box-shadow:0 2px 5px #ce93d8;}
+    #downloadBtn:hover { background:linear-gradient(90deg,#7e57c2,#42a5f5);}
+    .footer {text-align:center;margin:2rem 0;color:#888;font-size:0.95rem;}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Kid Toys Dashboard</h1>
+    <p>Discover fun and creative toys for children - interactive catalog with download feature.</p>
+  </header>
+  <main class="dashboard">
+    <section class="catalog-section">
+      <div class="catalog-title">Toy Catalog</div>
+      <div class="catalog-grid" id="toyGrid">
+        <!-- Toy cards go here -->
+      </div>
+    </section>
+    <button id="downloadBtn">Download Catalog</button>
+  </main>
+  <div class="footer">Special & Effective for Kids | Images via Freepik [web:10][web:13]</div>
+  <script>
+    // Sample toy catalog items with Freepik demo images
+    const toys = [
+      {
+        name: "Rainbow Stacker",
+        price: "$15",
+        image: "https://img.freepik.com/free-photo/colorful-wooden-toy_1203-6907.jpg?w=250&t=st=1697098349~exp=1697098949~hmac=e66347dccf1602d76eebdfb0961dd3de",
+        desc: "A classic stacking toy with vibrant colors, perfect for building coordination."
+      },
+      {
+        name: "Animal Puzzles",
+        price: "$22",
+        image: "https://img.freepik.com/free-photo/children-s-educational-toys-wooden-puzzles-with-animal-family_1150-9492.jpg?w=250&t=st=1697098349~exp=1697098949~hmac=e29e3656fc24a2942fd80ac858814760",
+        desc: "Interactive animal puzzles that encourage problem solving and imagination."
+      },
+      {
+        name: "Toy Truck",
+        price: "$18",
+        image: "https://img.freepik.com/free-photo/kids-toy-truck-isolated-wood-background_1150-11184.jpg?w=250&t=st=1697098349~exp=1697098949~hmac=af3eef6dbcf6aeeb1dd93d56f93beafe",
+        desc: "Rugged toy truck for indoor and outdoor play, made of safe materials."
+      },
+      {
+        name: "Building Blocks",
+        price: "$25",
+        image: "https://img.freepik.com/free-photo/kids-plastic-building-blocks-on-table_1232-1565.jpg?w=250&t=st=1697098349~exp=1697098949~hmac=a57c7e076d9aa83b51c4af19c8697b4e",
+        desc: "Colorful interlocking blocks for endless building adventures."
+      }
+    ];
+    // Render toy cards
+    const toyGrid = document.getElementById('toyGrid');
+    toys.forEach(toy => {
+      const card = document.createElement('div');
+      card.className = 'toy-card';
+      card.innerHTML = `
+        <img src="${toy.image}" class="toy-img" alt="${toy.name}">
+        <div class="toy-name">${toy.name}</div>
+        <div class="toy-price">${toy.price}</div>
+        <div class="toy-desc">${toy.desc}</div>
+      `;
+      toyGrid.appendChild(card);
+    });
+
+    // Download Catalog as HTML file (with images)
+    document.getElementById('downloadBtn').onclick = function() {
+      const htmlContent = `
+        <html><head><title>My Kid Toys Catalog</title></head><body>
+        <h1>My Kid Toys Catalog</h1>
+        <table border="1" cellpadding="8" style="border-collapse:collapse;">
+        <tr>
+          <th>Image</th>
+          <th>Name</th>
+          <th>Price</th>
+          <th>Description</th>
+        </tr>
+        ${toys.map(toy => `
+          <tr>
+            <td><img src="${toy.image}" width="80" /></td>
+            <td>${toy.name}</td>
+            <td>${toy.price}</td>
+            <td>${toy.desc}</td>
+          </tr>
+        `).join('')}
+        </table>
+        </body></html>`;
+      // Create and save downloadable file
+      const blob = new Blob([htmlContent], {type: "text/html"});
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = "Kid_Toys_Catalog.html";
+      a.click();
+    };
+  </script>
+</body>
+</html>
